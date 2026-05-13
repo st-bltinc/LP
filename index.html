@@ -55,13 +55,21 @@
     </header>
     <main>
         <div id="home" class="hero">
-            <a class="hero__favorite" href="#favorite">
-                <div class="hero__favorite-slider">
+            <div class="hero__favorite">
+                <div class="hero__favorite-images">
                     <img class="hero__favorite-image" src="snowboarding.jpg" alt="スノボーの写真">
                     <img class="hero__favorite-image" src="ardbeg.jpg" alt="アードベックの写真">
                     <img class="hero__favorite-image" src="mahjong.jpg" alt="麻雀の写真">
                 </div>
-            </a>
+                <div class="hero__favorite-dots">
+                    <button class="hero__favorite-dot hero__favorite-dot--active" aria-label="1枚目の画像"></button>
+                    <button class="hero__favorite-dot" aria-label="2枚目の画像"></button>
+                    <button class="hero__favorite-dot" aria-label="3枚目の画像"></button>
+                </div>
+                <button class="hero__favorite-button--left"><img src="Chevrons left.svg" alt="左へ"></button>
+                <button class="hero__favorite-button--right"><img src="Chevrons right.svg" alt="右へ"></button>
+                <a class="hero__favorite-text" href="#favorite">I'm Love it!</a>
+            </div>
             <a class="hero__profile" href="#profile"></a>
             <a class="hero__product" href="#product"></a>
             <a class="hero__interests" href="#interests"></a>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHUTO TANIGUCHI</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="header__title">MY PROFILE</h1>
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li class="header__nav-item">
+                    <a class="header__nav-link" href="#home">HOME</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" href="#favorite">FAVORITE</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" href="#product">PRODUCT</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" href="#interests">INTERESTS</a>
+                </li>
+                <li class="header__nav-item">
+                    <a class="header__nav-link" href="#contact">CONTACT</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="humburger">
+            <input type="checkbox" id="menu-btn-check" aria-label="メニューを開く">
+            <label for="menu-btn-check" class="hamburger__btn"><span></span></label>
+            <div class="hamburger__menu">
+                <ul class="hamburger__list">
+                    <li class="hamburger__item">
+                        <a class="hamburger__link" href="#home">HOME</a>
+                    </li>
+                    <li class="hamburger__item">
+                        <a class="hamburger__link" href="#favorite">FAVORITE</a>
+                    </li>
+                    <li class="hamburger__item">
+                        <a class="hamburger__link" href="#product">PRODUCT</a>
+                    </li>
+                    <li class="hamburger__item">
+                        <a class="hamburger__link" href="#interests">INTERESTS</a>
+                    </li>
+                    <li class="hamburger__item">
+                        <a class="hamburger__link" href="#contact">CONTACT</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="home" class="hero">
+            <a class="hero__favorite" href="#favorite">
+                <div class="hero__favorite-slider">
+                    <img class="hero__favorite-image" src="snowboarding.jpg" alt="スノボーの写真">
+                    <img class="hero__favorite-image" src="ardbeg.jpg" alt="アードベックの写真">
+                    <img class="hero__favorite-image" src="mahjong.jpg" alt="麻雀の写真">
+                </div>
+            </a>
+            <a class="hero__profile" href="#profile"></a>
+            <a class="hero__product" href="#product"></a>
+            <a class="hero__interests" href="#interests"></a>
+            <a class="hero__contact" href="#contact"></a>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめのカクテル</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('neo.png'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* 背景色 */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        select, button {
+            padding: 12px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        select:hover, button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #555;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cocktail-details {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .cocktail-details.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>おすすめのカクテル</h1>
+
+        <label for="alcohol">お酒の強さ：</label>
+        <select id="alcohol">
+            <option value="10％以下">10％以下</option>
+            <option value="20％程度">20％程度</option>
+            <option value="30％以上">30％以上</option>
+
+        </select><br>
+
+        <label for="taste">味の好み：</label>
+        <select id="taste">
+            <option value="甘い">甘い</option>
+            <option value="さっぱり">さっぱり</option>
+            <option value="ビター">ビター</option>
+        </select><br>
+
+        <label for="fruit">フルーツの好み：</label>
+        <select id="fruit">
+            <option value="なし">なし</option>
+            <option value="オレンジ">オレンジ</option>
+            <option value="グレープフルーツ">グレープフルーツ</option>
+            <option value="ミルク">ミルク</option>
+
+        </select><br>
+
+        <button onclick="getRandomCocktail()">カクテルを表示する</button>
+
+        <div id="cocktailDetails" class="cocktail-details">
+            <p id="cocktailName"></p>
+            <img id="cocktailImage" src="" alt="カクテルの画像">
+        </div>
+    </div>
+
+    <script>
+        // カクテルのデータ
+var cocktails = [
+    { name: "モヒート", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "mojito.jpg" },
+    { name: "マルガリータ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "marga.jpg" },
+    { name: "ネグローニ", alcohol: "20％程度", taste: "ビター", fruit: "なし", image: "negro.jpg" },
+    { name: "ジンライム", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "ginlime.jpg" },
+    { name: "ジントニック", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "gintoni.jpg" },
+    { name: "ギムレット", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "gimlet.jpg" },
+    { name: "ジンバック", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "ginbuck.jpg" },
+    { name: "シティーコーラル", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "cityco.jpg" },
+    { name: "シンガポールスリング", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "singa.jpg" },
+    { name: "モスコミュール", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "moscow.jpg" },
+    { name: "バラライカ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "balala.jpg" },
+    { name: "レッドルシアン", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "r lucian.jpg" },
+    { name: "ブラックルシアン", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "b lucian.jpg" },
+    { name: "カミカゼ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "kamikaze.jpg" },
+    { name: "メロンボール", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "melon b.jpg" },
+    { name: "ブラッティーメアリー", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "b mary.jpg" },
+    { name: "ブルドック", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "b dog.jpg" },
+    { name: "ソルティードッグ", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "s dog.jpg" },
+    { name: "スクリュードライバー", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "screw d.jpg" },
+    { name: "シーブリーズ", alcohol: "10％以下", taste: "さっぱり", fruit: "グレープフルーツ", image: "sea br.jpg" },
+    { name: "セックスオンザビーチ", alcohol: "10％以下", taste: "さっぱり", fruit: "オレンジ", image: "sex.jpg" },
+    { name: "メキシコーラ", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "mexi.jpg" },
+    { name: "テキーラサンライズ", alcohol: "20％程度", taste: "甘い", fruit: "オレンジ", image: "sunrise.jpg" },
+    { name: "カシスソーダ", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "cassis s.jpg" },
+    { name: "カシスオレンジ", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "cassis o.jpg" },
+    { name: "抹茶ミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "matcha m.jpg" },
+    { name: "スプモーニ", alcohol: "10％以下", taste: "ビター", fruit: "グレープフルーツ", image: "supumoni.jpg" },
+    { name: "ファジーネーブル", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "fuzzy.jpg" },
+    { name: "カルーアミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "kahlua m.jpg" },
+    { name: "パッソアグレープフルーツ", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "passoa g.jpg" },
+    { name: "ロングアイランドアイスティー", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "long i i tea.jpg" },
+    { name: "チャイニーズブルー", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "c blue.jpg" },
+    { name: "ラスティネイル", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "nail.jpg" },
+    { name: "アマレットミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "amaretto m.jpg" },
+    { name: "マリブミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "malibu m.jpg" },
+    { name: "グラスホッパー", alcohol: "20％程度", taste: "甘い", fruit: "ミルク", image: "g hopper.jpg" },
+    { name: "レモンレモン", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "lemon2.jpg" },
+    { name: "アメリカンレモネード", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "amelemo.jpg" },
+    { name: "レッドアイ", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "redeye.jpg" },
+    { name: "コーヒーカクテル", alcohol: "10％以下", taste: "ビター", fruit: "なし", image: "coffee.jpg" },
+    { name: "", alcohol: "", taste: "", fruit: "", image: "" }
+];
+
+        function getRandomCocktail() {
+            var selectedAlcohol = document.getElementById('alcohol').value;
+            var selectedTaste = document.getElementById('taste').value;
+            var selectedFruit = document.getElementById('fruit').value;
+
+            // 条件に合うカクテルをフィルタリング
+            var matchingCocktails = cocktails.filter(function(cocktail) {
+                return cocktail.alcohol === selectedAlcohol &&
+                       cocktail.taste === selectedTaste &&
+                       cocktail.fruit === selectedFruit;
+            });
+
+            if (matchingCocktails.length > 0) {
+                var randomIndex = Math.floor(Math.random() * matchingCocktails.length);
+                var randomCocktail = matchingCocktails[randomIndex];
+                document.getElementById('cocktailName').innerText = randomCocktail.name;
+                document.getElementById('cocktailImage').src = randomCocktail.image;
+                document.getElementById('cocktailDetails').classList.add('show');
+            } else {
+                var randomIndex = Math.floor(Math.random() * cocktails.length);
+                var randomCocktail = cocktails[randomIndex];
+                document.getElementById('cocktailName').innerText = "条件に合うカクテルが見つかりませんでした。以下はすべてのカクテルの中からランダムに選ばれた1つです";
+                document.getElementById('cocktailImage').src = randomCocktail.image;
+                document.getElementById('cocktailDetails').classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>

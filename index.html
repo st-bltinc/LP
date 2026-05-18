@@ -17,7 +17,7 @@
         <nav class="header__nav">
             <ul class="header__nav-list">
                 <li class="header__nav-item">
-                    <a class="header__nav-link" href="#home">HOME</a>
+                    <a class="header__nav-link" href="#">HOME</a>
                 </li>
                 <li class="header__nav-item">
                     <a class="header__nav-link" href="#favorite">FAVORITE</a>
@@ -39,7 +39,7 @@
             <div class="hamburger__menu">
                 <ul class="hamburger__list">
                     <li class="hamburger__item">
-                        <a class="hamburger__link" href="#home">HOME</a>
+                        <a class="hamburger__link" href="#">HOME</a>
                     </li>
                     <li class="hamburger__item">
                         <a class="hamburger__link" href="#favorite">FAVORITE</a>
@@ -58,7 +58,7 @@
         </div>
     </header>
     <main>
-        <div id="home" class="hero">
+        <div class="hero">
             <div class="hero__favorite">
                 <div class="hero__favorite-images">
                     <img class="hero__favorite-image" src="snowboarding.jpg" alt="スノボーの写真">
@@ -66,9 +66,10 @@
                     <img class="hero__favorite-image" src="mahjong.jpg" alt="麻雀の写真">
                 </div>
                 <div class="hero__favorite-dots">
-                    <button class="hero__favorite-dot hero__favorite-dot--active" aria-label="1枚目の画像"></button>
-                    <button class="hero__favorite-dot" aria-label="2枚目の画像"></button>
-                    <button class="hero__favorite-dot" aria-label="3枚目の画像"></button>
+                    <button class="hero__favorite-dot hero__favorite-dot--active" data-slide="0"
+                        aria-label="1枚目の画像"></button>
+                    <button class="hero__favorite-dot" data-slide="1" aria-label="2枚目の画像"></button>
+                    <button class="hero__favorite-dot" data-slide="2" aria-label="3枚目の画像"></button>
                 </div>
                 <button class="hero__favorite-button--left"><img src="Chevrons left.svg" alt="左へ"></button>
                 <button class="hero__favorite-button--right"><img src="Chevrons right.svg" alt="右へ"></button>
@@ -79,12 +80,13 @@
             </a>
             <a class="hero__product" href="#product">
                 <img class="hero__product-image" src="Frame 3.svg" alt="私のプロダクト">
+                <p class="hero__product-text">Product</p>
             </a>
             <a class="hero__interests" href="#interests">
                 <p class="hero__interests-text">Interests!!</p>
-                <p class="hero__interests-subtext">more more more</p>
-                <p class="hero__interests-subtext">more more more</p>
-                <p class="hero__interests-subtext">more more more</p>
+                <p class="hero__interests-subtext--1">more more more</p>
+                <p class="hero__interests-subtext--2">more more more</p>
+                <p class="hero__interests-subtext--3">more more more</p>
             </a>
             <a class="hero__contact" href="#contact">
                 <img class="hero__contact-arrow" src="Arrow up-right.svg" alt="CONTACTへ">

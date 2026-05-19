@@ -710,7 +710,7 @@ img {
 }
 
 .contact__text {
-    font-size: 30px;
+    font-size: 28px;
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
     margin-bottom: 80px;
@@ -759,7 +759,11 @@ img {
     height: 40px;
 }
 
-footer {}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--white);
+}
 
 
 @media (max-width: 1024px) {

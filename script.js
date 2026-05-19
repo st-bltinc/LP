@@ -13,7 +13,6 @@ function updateImage() {
     const marginRight = parseInt(style.marginRight);
     const imageWidth = image.children[0].offsetWidth + marginRight;
     image.style.transform = `translateX(-${imageWidth * currentIndex}px)`;
-    image.style.transform = `translateX(${offset}%)`;
 };
 
 leftButton.addEventListener('click', () => {

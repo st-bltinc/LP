@@ -37,7 +37,6 @@ main {
     margin-top: 90px;
 }
 
-/* ヘッダーナビ */
 .header__nav-list {
     list-style: none;
     display: flex;
@@ -703,9 +702,64 @@ img {
 }
 
 .contact {
-    padding: 48px;
+    padding: 30px;
     background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.contact__text {
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.contact__buttons {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 30px;
+}
+
+.contact__email,
+.contact__slack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 280px;
+    height: 64px;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: opacity 0.2s;
+    cursor: pointer;
+}
+
+.contact__email {
+    background-color: rgb(185, 185, 185);
+    color: var(--white);
+}
+
+.contact__slack {
+    background-color: #973199;
+    color: var(--white);
+}
+
+.contact__email:hover,
+.contact__slack:hover {
+    opacity: 0.8;
+}
+
+.contact__email-icon,
+.contact__slack-icon {
+    width: 40px;
+    height: 40px;
+}
+
+footer {}
 
 
 @media (max-width: 1024px) {

@@ -1,185 +1,482 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>おすすめのカクテル</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e8d5a3;
+            --dark: #1a1209;
+            --mid: #2e1f0a;
+            --glass: rgba(255, 248, 230, 0.07);
+            --text: #f5ead4;
+            --text-muted: #b8a480;
+            --border: rgba(201, 169, 110, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+
+        body {
+            font-family: 'Noto Serif JP', serif;
             min-height: 100vh;
-            background-image: url('neo.png'); 
+            background-image: url('neo.png');
             background-size: cover;
             background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px 60px;
         }
 
         .container {
+            width: 100%;
+            max-width: 520px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* 背景色 */
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ── ヘッダー ── */
+        .header {
+            margin-bottom: 36px;
+        }
+
+        .header .eyebrow {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 13px;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         h1 {
-            margin-bottom: 30px;
-            font-size: 28px;
-            color: #333;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
         }
 
-        select, button {
-            padding: 12px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 6px;
-            background-color: #007bff;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 16px auto 0;
+            max-width: 260px;
         }
 
-        select:hover, button:hover {
-            background-color: #0056b3;
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
 
-        p {
-            margin-top: 30px;
-            font-size: 20px;
-            color: #555;
+        .divider-diamond {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            flex-shrink: 0;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        /* ── フォームカード ── */
+        .form-card {
+            background: rgba(20, 12, 3, 0.72);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 28px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
-        .cocktail-details {
-            display: none;
-            margin-top: 30px;
+        .field {
+            margin-bottom: 18px;
+            text-align: left;
         }
 
-        .cocktail-details.show {
+        .field label {
             display: block;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 11px 36px 11px 14px;
+            background: rgba(255, 240, 200, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 14px;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a96e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        select:hover,
+        select:focus {
+            border-color: var(--gold);
+            background-color: rgba(255, 240, 200, 0.1);
+            outline: none;
+        }
+
+        select option {
+            background: #2a1a05;
+            color: var(--text);
+        }
+
+        /* ── ボタン ── */
+        .btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #b8892a 0%, #e8c56a 50%, #b8892a 100%);
+            background-size: 200% auto;
+            color: #1a1209;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-position 0.4s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(201, 169, 110, 0.35);
+        }
+
+        .btn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(201, 169, 110, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── 結果エリア ── */
+        .result-area {
+            display: none;
+            margin-top: 32px;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        .result-area.show {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-label {
+            font-size: 20px;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-bottom: 10px;
+            background-color: var(--text);
+            border-radius: 20px;
+        }
+
+        .cocktail-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.3;
+            background-color: var(--mid);
+        }
+
+        /* ── 画像リンク ── */
+        .image-link {
+            display: inline-block;
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .image-link:hover {
+            transform: scale(1.025);
+            box-shadow: 0 10px 44px rgba(0, 0, 0, 0.75), 0 0 0 2px var(--gold);
+        }
+
+        .image-link img {
+            display: block;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            border-radius: 14px;
+        }
+
+        /* ホバー時のオーバーレイ */
+        .image-link::after {
+            content: '材料・作り方を見る →';
+            position: absolute;
+            inset: 0;
+            background: rgba(20, 10, 0, 0.72);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            opacity: 0;
+            transition: opacity 0.25s;
+            border-radius: 14px;
+        }
+
+        .image-link:hover::after {
+            opacity: 1;
+        }
+
+        .tap-hint {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .tap-hint span {
+            color: var(--gold);
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 28px;
+            margin-bottom: 8px;
+            padding: 11px 32px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-muted);
+            font-family: 'Noto Serif JP', serif;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .home-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .no-match-msg {
+            font-size: 13px;
+            color: var(--mid);
+            margin-bottom: 14px;
+            line-height: 1.7;
+            background-color: rgba(240, 170, 170, 0.9);
+            border-radius: 10px;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>おすすめのカクテル</h1>
+        <div class="header">
+            <p class="eyebrow">Bar Recommender</p>
+            <h1>「カクシル」</h1>
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
+        </div>
 
-        <label for="alcohol">お酒の強さ：</label>
-        <select id="alcohol">
-            <option value="10％以下">10％以下</option>
-            <option value="20％程度">20％程度</option>
-            <option value="30％以上">30％以上</option>
+        <div class="form-card">
+            <div class="field">
+                <label for="base">ベーススピリッツ</label>
+                <select id="base">
+                    <option value="すべて">すべて</option>
+                    <option value="ウォッカ">ウォッカ</option>
+                    <option value="ラム">ラム</option>
+                    <option value="ジン">ジン</option>
+                    <option value="テキーラ">テキーラ</option>
+                    <option value="その他">その他</option>
+                </select>
+            </div>
 
-        </select><br>
+            <div class="field">
+                <label for="alcohol">お酒の強さ</label>
+                <select id="alcohol">
+                    <option value="10％以下">10％以下</option>
+                    <option value="20％程度">20％程度</option>
+                    <option value="30％以上">30％以上</option>
+                </select>
+            </div>
 
-        <label for="taste">味の好み：</label>
-        <select id="taste">
-            <option value="甘い">甘い</option>
-            <option value="さっぱり">さっぱり</option>
-            <option value="ビター">ビター</option>
-        </select><br>
+            <div class="field">
+                <label for="taste">味の好み</label>
+                <select id="taste">
+                    <option value="甘い">甘い</option>
+                    <option value="さっぱり">さっぱり</option>
+                    <option value="ビター">ビター</option>
+                </select>
+            </div>
 
-        <label for="fruit">フルーツの好み：</label>
-        <select id="fruit">
-            <option value="なし">なし</option>
-            <option value="オレンジ">オレンジ</option>
-            <option value="グレープフルーツ">グレープフルーツ</option>
-            <option value="ミルク">ミルク</option>
+            <div class="field">
+                <label for="fruit">フルーツ・ミルク</label>
+                <select id="fruit">
+                    <option value="なし">なし</option>
+                    <option value="オレンジ">オレンジ</option>
+                    <option value="グレープフルーツ">グレープフルーツ</option>
+                    <option value="ミルク">ミルク</option>
+                </select>
+            </div>
 
-        </select><br>
+            <button class="btn" onclick="getRandomCocktail()">カクテルを探す</button>
+        </div>
 
-        <button onclick="getRandomCocktail()">カクテルを表示する</button>
-
-        <div id="cocktailDetails" class="cocktail-details">
-            <p id="cocktailName"></p>
-            <img id="cocktailImage" src="" alt="カクテルの画像">
+        <!-- 結果 -->
+        <div id="cocktailDetails" class="result-area">
+            <p class="result-label">おすすめのカクテル</p>
+            <p id="noMatchMsg" class="no-match-msg" style="display:none;">
+                条件に合うカクテルが見つかりませんでした。<br>全カクテルからランダムにご提案します。
+            </p>
+            <p id="cocktailName" class="cocktail-name"></p>
+            <a id="cocktailLink" href="#" target="_blank" rel="noopener noreferrer" class="image-link">
+                <img id="cocktailImage" src="" alt="カクテルの画像">
+            </a>
+            <p class="tap-hint">画像をタップして<span>材料・作り方</span>を確認</p>
+            <button class="home-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">▲ トップへ戻る</button>
         </div>
     </div>
 
     <script>
-        // カクテルのデータ
-var cocktails = [
-    { name: "モヒート", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "mojito.jpg" },
-    { name: "マルガリータ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "marga.jpg" },
-    { name: "ネグローニ", alcohol: "20％程度", taste: "ビター", fruit: "なし", image: "negro.jpg" },
-    { name: "ジンライム", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "ginlime.jpg" },
-    { name: "ジントニック", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "gintoni.jpg" },
-    { name: "ギムレット", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "gimlet.jpg" },
-    { name: "ジンバック", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "ginbuck.jpg" },
-    { name: "シティーコーラル", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "cityco.jpg" },
-    { name: "シンガポールスリング", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "singa.jpg" },
-    { name: "モスコミュール", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "moscow.jpg" },
-    { name: "バラライカ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "balala.jpg" },
-    { name: "レッドルシアン", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "r lucian.jpg" },
-    { name: "ブラックルシアン", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "b lucian.jpg" },
-    { name: "カミカゼ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "kamikaze.jpg" },
-    { name: "メロンボール", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "melon b.jpg" },
-    { name: "ブラッティーメアリー", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "b mary.jpg" },
-    { name: "ブルドック", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "b dog.jpg" },
-    { name: "ソルティードッグ", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "s dog.jpg" },
-    { name: "スクリュードライバー", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "screw d.jpg" },
-    { name: "シーブリーズ", alcohol: "10％以下", taste: "さっぱり", fruit: "グレープフルーツ", image: "sea br.jpg" },
-    { name: "セックスオンザビーチ", alcohol: "10％以下", taste: "さっぱり", fruit: "オレンジ", image: "sex.jpg" },
-    { name: "メキシコーラ", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "mexi.jpg" },
-    { name: "テキーラサンライズ", alcohol: "20％程度", taste: "甘い", fruit: "オレンジ", image: "sunrise.jpg" },
-    { name: "カシスソーダ", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "cassis s.jpg" },
-    { name: "カシスオレンジ", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "cassis o.jpg" },
-    { name: "抹茶ミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "matcha m.jpg" },
-    { name: "スプモーニ", alcohol: "10％以下", taste: "ビター", fruit: "グレープフルーツ", image: "supumoni.jpg" },
-    { name: "ファジーネーブル", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "fuzzy.jpg" },
-    { name: "カルーアミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "kahlua m.jpg" },
-    { name: "パッソアグレープフルーツ", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "passoa g.jpg" },
-    { name: "ロングアイランドアイスティー", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "long i i tea.jpg" },
-    { name: "チャイニーズブルー", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "c blue.jpg" },
-    { name: "ラスティネイル", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "nail.jpg" },
-    { name: "アマレットミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "amaretto m.jpg" },
-    { name: "マリブミルク", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "malibu m.jpg" },
-    { name: "グラスホッパー", alcohol: "20％程度", taste: "甘い", fruit: "ミルク", image: "g hopper.jpg" },
-    { name: "レモンレモン", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "lemon2.jpg" },
-    { name: "アメリカンレモネード", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "amelemo.jpg" },
-    { name: "レッドアイ", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "redeye.jpg" },
-    { name: "コーヒーカクテル", alcohol: "10％以下", taste: "ビター", fruit: "なし", image: "coffee.jpg" },
-    { name: "", alcohol: "", taste: "", fruit: "", image: "" }
-];
+        var cocktails = [
+            // ── ジン ──
+            { name: "ジントニック", base: "ジン", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "gintoni.jpg" },
+            { name: "ジンバック", base: "ジン", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "ginbuck.jpg" },
+            { name: "シティーコーラル", base: "ジン", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "cityco.jpg" },
+            { name: "シンガポールスリング", base: "ジン", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "singa.jpg" },
+            { name: "ネグローニ", base: "ジン", alcohol: "20％程度", taste: "ビター", fruit: "なし", image: "negro.jpg" },
+            { name: "ジンライム", base: "ジン", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "ginlime.jpg" },
+            { name: "ギムレット", base: "ジン", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "gimlet.jpg" },
+            // ── ウォッカ ──
+            { name: "モスコミュール", base: "ウォッカ", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "moscow.jpg" },
+            { name: "シーブリーズ", base: "ウォッカ", alcohol: "10％以下", taste: "さっぱり", fruit: "グレープフルーツ", image: "sea br.jpg" },
+            { name: "セックスオンザビーチ", base: "ウォッカ", alcohol: "10％以下", taste: "さっぱり", fruit: "オレンジ", image: "sex.jpg" },
+            { name: "ブラッティーメアリー", base: "ウォッカ", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "b mary.jpg" },
+            { name: "ブルドック", base: "ウォッカ", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "b dog.jpg" },
+            { name: "ソルティードッグ", base: "ウォッカ", alcohol: "20％程度", taste: "さっぱり", fruit: "グレープフルーツ", image: "s dog.jpg" },
+            { name: "スクリュードライバー", base: "ウォッカ", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "screw d.jpg" },
+            { name: "メロンボール", base: "ウォッカ", alcohol: "20％程度", taste: "さっぱり", fruit: "オレンジ", image: "melon b.jpg" },
+            { name: "バラライカ", base: "ウォッカ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "balala.jpg" },
+            { name: "カミカゼ", base: "ウォッカ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "kamikaze.jpg" },
+            { name: "レッドルシアン", base: "ウォッカ", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "r lucian.jpg" },
+            { name: "ブラックルシアン", base: "ウォッカ", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "b lucian.jpg" },
+            { name: "ロングアイランドアイスティー", base: "ウォッカ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "long i i tea.jpg" },
+            // ── ラム ──
+            { name: "モヒート", base: "ラム", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "mojito.jpg" },
+            { name: "マリブミルク", base: "ラム", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "malibu m.jpg" },
+            // ── テキーラ ──
+            { name: "メキシコーラ", base: "テキーラ", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "mexi.jpg" },
+            { name: "テキーラサンライズ", base: "テキーラ", alcohol: "20％程度", taste: "甘い", fruit: "オレンジ", image: "sunrise.jpg" },
+            { name: "マルガリータ", base: "テキーラ", alcohol: "30％以上", taste: "さっぱり", fruit: "なし", image: "marga.jpg" },
+            // ── その他 ──
+            { name: "カシスソーダ", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "なし", image: "cassis s.jpg" },
+            { name: "カシスオレンジ", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "cassis o.jpg" },
+            { name: "抹茶ミルク", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "matcha m.jpg" },
+            { name: "スプモーニ", base: "その他", alcohol: "10％以下", taste: "ビター", fruit: "グレープフルーツ", image: "supumoni.jpg" },
+            { name: "ファジーネーブル", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "オレンジ", image: "fuzzy.jpg" },
+            { name: "カルーアミルク", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "kahlua m.jpg" },
+            { name: "パッソアグレープフルーツ", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "passoa g.jpg" },
+            { name: "チャイニーズブルー", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "グレープフルーツ", image: "c blue.jpg" },
+            { name: "アメリカンレモネード", base: "その他", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "amelemo.jpg" },
+            { name: "レッドアイ", base: "その他", alcohol: "10％以下", taste: "さっぱり", fruit: "なし", image: "redeye.jpg" },
+            { name: "コーヒーカクテル", base: "その他", alcohol: "10％以下", taste: "ビター", fruit: "なし", image: "coffee.jpg" },
+            { name: "グラスホッパー", base: "その他", alcohol: "20％程度", taste: "甘い", fruit: "ミルク", image: "g hopper.jpg" },
+            { name: "レモンレモン", base: "その他", alcohol: "20％程度", taste: "さっぱり", fruit: "なし", image: "lemon2.jpg" },
+            { name: "アマレットミルク", base: "その他", alcohol: "10％以下", taste: "甘い", fruit: "ミルク", image: "amaretto m.jpg" },
+            { name: "ラスティネイル", base: "その他", alcohol: "30％以上", taste: "甘い", fruit: "なし", image: "nail.jpg" },
+        ];
+
+        function getRecipeUrl(name) {
+            return "https://www.google.com/search?q=" + encodeURIComponent(name + " カクテル 材料 作り方 レシピ");
+        }
 
         function getRandomCocktail() {
+            var selectedBase = document.getElementById('base').value;
             var selectedAlcohol = document.getElementById('alcohol').value;
             var selectedTaste = document.getElementById('taste').value;
             var selectedFruit = document.getElementById('fruit').value;
 
-            // 条件に合うカクテルをフィルタリング
-            var matchingCocktails = cocktails.filter(function(cocktail) {
-                return cocktail.alcohol === selectedAlcohol &&
-                       cocktail.taste === selectedTaste &&
-                       cocktail.fruit === selectedFruit;
+            var pool = cocktails.filter(function (c) {
+                var baseOk = (selectedBase === "すべて") || (c.base === selectedBase);
+                var alcoholOk = c.alcohol === selectedAlcohol;
+                var tasteOk = c.taste === selectedTaste;
+                var fruitOk = c.fruit === selectedFruit;
+                return baseOk && alcoholOk && tasteOk && fruitOk;
             });
 
-            if (matchingCocktails.length > 0) {
-                var randomIndex = Math.floor(Math.random() * matchingCocktails.length);
-                var randomCocktail = matchingCocktails[randomIndex];
-                document.getElementById('cocktailName').innerText = randomCocktail.name;
-                document.getElementById('cocktailImage').src = randomCocktail.image;
-                document.getElementById('cocktailDetails').classList.add('show');
+            var noMatchMsg = document.getElementById('noMatchMsg');
+            var detailsEl = document.getElementById('cocktailDetails');
+            var chosen;
+
+            if (pool.length > 0) {
+                noMatchMsg.style.display = 'none';
+                chosen = pool[Math.floor(Math.random() * pool.length)];
             } else {
-                var randomIndex = Math.floor(Math.random() * cocktails.length);
-                var randomCocktail = cocktails[randomIndex];
-                document.getElementById('cocktailName').innerText = "条件に合うカクテルが見つかりませんでした。以下はすべてのカクテルの中からランダムに選ばれた1つです";
-                document.getElementById('cocktailImage').src = randomCocktail.image;
-                document.getElementById('cocktailDetails').classList.add('show');
+                noMatchMsg.style.display = 'block';
+                var validCocktails = cocktails.filter(function (c) { return c.name !== ""; });
+                chosen = validCocktails[Math.floor(Math.random() * validCocktails.length)];
             }
+
+            document.getElementById('cocktailName').innerText = chosen.name;
+            document.getElementById('cocktailImage').src = chosen.image;
+            document.getElementById('cocktailImage').alt = chosen.name + "の画像";
+            document.getElementById('cocktailLink').href = getRecipeUrl(chosen.name);
+
+            // アニメーションをリセットして再発火
+            detailsEl.classList.remove('show');
+            void detailsEl.offsetWidth; // reflow
+            detailsEl.classList.add('show');
+
+            // 結果が見えるように自動スクロール
+            setTimeout(function () {
+                var img = document.getElementById('cocktailImage');
+                var top = img.getBoundingClientRect().top + window.pageYOffset - (window.innerHeight / 2) + (img.offsetHeight / 2);
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            }, 50);
         }
     </script>
 </body>
+
 </html>

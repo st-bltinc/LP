@@ -37,3 +37,29 @@ dots.forEach((dot) => {
         updateImage();
     });
 });
+
+const table = ['よ', 'う', 'こ', 'そ', '!', ' ', '私', 'の', 'プ', 'ロ', 'フ', 'ィ', 'ー', 'ル', 'へ'];
+const original = ['S', 'H', 'U', 'T', 'O', ' ', 'T', 'A', 'N', 'I', 'G', 'U', 'C', 'H', 'I'];
+const spans = document.querySelectorAll('.profile__label-text span');
+
+function animate() {
+    spans.forEach((span, index) => {
+        setTimeout(() => {
+            span.textContent = table[index];
+        }, 200 * index + 3000);
+    });
+
+    setTimeout(() => {
+        spans.forEach((span, index) => {
+            setTimeout(() => {
+                span.textContent = original[index];
+            }, 200 * (spans.length - 1 - index));
+        });
+    }, 200 * spans.length + 5000);
+}
+
+animate();
+
+setInterval(() => {
+    animate();
+}, 200 * spans.length * 4);

@@ -96,8 +96,8 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px 28px;
-            backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
@@ -125,8 +125,8 @@
             color: var(--text);
             font-family: 'Noto Serif JP', serif;
             font-size: 14px;
-            appearance: none;
             -webkit-appearance: none;
+            appearance: none;
             cursor: pointer;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a96e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
@@ -297,6 +297,11 @@
             color: var(--gold);
         }
 
+        /* ── メッセージ ── */
+        .hidden {
+            display: none;
+        }
+
         .no-match-msg {
             font-size: 13px;
             color: var(--mid);
@@ -367,7 +372,7 @@
         <!-- 結果 -->
         <div id="cocktailDetails" class="result-area">
             <p class="result-label">おすすめのカクテル</p>
-            <p id="noMatchMsg" class="no-match-msg" style="display:none;">
+            <p id="noMatchMsg" class="no-match-msg hidden">
                 条件に合うカクテルが見つかりませんでした。<br>全カクテルからランダムにご提案します。
             </p>
             <p id="cocktailName" class="cocktail-name"></p>
@@ -451,10 +456,10 @@
             var chosen;
 
             if (pool.length > 0) {
-                noMatchMsg.style.display = 'none';
+                noMatchMsg.classList.add('hidden');
                 chosen = pool[Math.floor(Math.random() * pool.length)];
             } else {
-                noMatchMsg.style.display = 'block';
+                noMatchMsg.classList.remove('hidden');
                 var validCocktails = cocktails.filter(function (c) { return c.name !== ""; });
                 chosen = validCocktails[Math.floor(Math.random() * validCocktails.length)];
             }
@@ -466,7 +471,7 @@
 
             // アニメーションをリセットして再発火
             detailsEl.classList.remove('show');
-            void detailsEl.offsetWidth; // reflow
+            void detailsEl.offsetWidth;
             detailsEl.classList.add('show');
 
             // 結果が見えるように自動スクロール

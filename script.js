@@ -63,3 +63,13 @@ animate();
 setInterval(() => {
     animate();
 }, 200 * spans.length * 4);
+
+const element = document.querySelector('.hero__contact');
+const audio = document.querySelector('#contact-sound');
+element.addEventListener('mouseenter', () => {
+    audio.play();
+});
+element.addEventListener('mouseleave', () => {
+    audio.pause();
+    audio.currentTime = 0;
+});

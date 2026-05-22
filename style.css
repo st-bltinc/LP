@@ -937,6 +937,7 @@ footer {
     text-align: center;
     padding: 10px;
     background-color: var(--white);
+    font-size: 10px;
 }
 
 
@@ -1025,7 +1026,7 @@ footer {
         margin: 0;
         padding: 20px;
         background-color: rgba(255, 255, 255, 0.9);
-        font-size: 18px;
+        font-size: 16px;
         border-radius: 20px;
         overflow-y: auto;
         align-items: center;

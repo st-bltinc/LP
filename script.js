@@ -85,7 +85,8 @@ const element = document.querySelector('.hero__contact');
 const audio = document.querySelector('#contact-sound');
 audio.volume = 0.3;
 element.addEventListener('mouseenter', () => {
-    audio.play();
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
 });
 element.addEventListener('mouseleave', () => {
     audio.pause();

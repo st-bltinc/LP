@@ -84,9 +84,10 @@ document.addEventListener('click', (e) => {
 const element = document.querySelector('.hero__contact');
 const audio = document.querySelector('#contact-sound');
 audio.volume = 0.3;
+
 element.addEventListener('mouseenter', () => {
     audio.currentTime = 0;
-    audio.play().catch(() => {});
+    audio.play().catch(() => { });
 });
 element.addEventListener('mouseleave', () => {
     audio.pause();

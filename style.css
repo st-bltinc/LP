@@ -511,6 +511,7 @@ img {
     font-size: 8px;
     position: absolute;
     top: 0;
+    left: 0;
     text-shadow:
         1vw -80px 2px, 3vw -600px 1px, 5vw -1200px 3px, 7vw -1800px 2px, 9vw -2400px 4px,
         11vw -3000px 1px, 13vw -300px 3px, 15vw -900px 2px, 17vw -1500px 5px, 19vw -2100px 1px,

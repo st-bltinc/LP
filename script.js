@@ -64,8 +64,26 @@ setInterval(() => {
     animate();
 }, 200 * spans.length * 4);
 
+const interestItems = document.querySelectorAll('.interests__item');
+interestItems.forEach(item => {
+    item.addEventListener('click', () => {
+        if (window.matchMedia('(hover: hover)').matches) return;
+        const isActive = item.classList.contains('interests__item--active');
+        interestItems.forEach(i => i.classList.remove('interests__item--active'));
+        if (!isActive) item.classList.add('interests__item--active');
+    });
+});
+
+document.addEventListener('click', (e) => {
+    if (window.matchMedia('(hover: hover)').matches) return;
+    if (!e.target.closest('.interests__item')) {
+        interestItems.forEach(i => i.classList.remove('interests__item--active'));
+    }
+});
+
 const element = document.querySelector('.hero__contact');
 const audio = document.querySelector('#contact-sound');
+audio.volume = 0.3;
 element.addEventListener('mouseenter', () => {
     audio.play();
 });

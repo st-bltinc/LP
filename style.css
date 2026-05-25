@@ -672,7 +672,7 @@ img {
 
 .profile__label {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     width: 100%;
     font-weight: 800;
     font-size: 100px;
@@ -940,6 +940,8 @@ footer {
     background-color: var(--white);
     font-size: 10px;
 }
+
+
 
 
 @media (max-width: 1200px) {

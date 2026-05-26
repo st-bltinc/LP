@@ -679,6 +679,7 @@ img {
     color: var(--text);
     text-align: right;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .favorite {
@@ -944,7 +945,13 @@ footer {
 
 
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
+    .hero {
+        display: none;
+    }
+}
+
+@media (max-width: 1350px) {
     .hero {
         display: none;
     }
@@ -1000,7 +1007,7 @@ footer {
     .product__item-kakusiru {
         width: 100%;
         max-width: 400px;
-        height: auto;
+        height: 650px;
     }
 
     .interests__items {
@@ -1144,7 +1151,7 @@ footer {
     }
 
     .product__item-kakusiru {
-        height: 420px;
+        height: 650px;
     }
 
     .interests {
